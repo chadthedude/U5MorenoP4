@@ -32,6 +32,20 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         
+       
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+
+        if (!gameObject.CompareTag("Bad") && gameManager.isGameActive)
+        {
+            gameManager.UpdateLives(-1);
+        }
+    }
+
+    public void DestroyTarget()
+    {
         if (gameManager.isGameActive)
         {
             Destroy(gameObject);
@@ -39,14 +53,7 @@ public class Target : MonoBehaviour
             gameManager.UpdateScore(pointValue);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
-        if (!gameObject.CompareTag("Bad") && gameManager.isGameActive)
-        {
-            gameManager.UpdateLives(-1);
-        }
-    }
+
     Vector3 RandomForce()
     {
         return Vector3.up * Random.Range(minSpeed, maxSpeed);
